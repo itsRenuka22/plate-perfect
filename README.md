@@ -50,9 +50,12 @@ Detection of Number Plate using the robust and state-of-art Yolov8 model, latest
 
 ### Example
 
-**Request image**
-![Request](examples/RequestImage.png)
+**Front end **
+![FrontEnd](result_images/FrontEnd.png)
 
-**Response image**
-![Response](examples/IBA_Cir_01_ResponseImage.png)
+**Valid LP**
+![Valid LP](result_images/ValidLP.png)
+
+**Invalid LP**
+![Invalid LP](result_images/InvalidLP.png)
 
