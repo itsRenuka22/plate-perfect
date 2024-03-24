@@ -50,7 +50,7 @@ Detection of Number Plate using the robust and state-of-art Yolov8 model, latest
 
 ### Example
 
-**Front end **
+**Front end**
 ![FrontEnd](result_images/FrontEnd.png)
 
 **Valid LP**
