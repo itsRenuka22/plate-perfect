@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222; /* Dark background color */
+            color: #f4f3ee; /* Light text color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #463f3a; /* Dark container background color */
+            border-radius: 20px; /* Increased border radius */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Light box shadow */
+            text-align: center;
+        }
+        h1 {
+            color: #f4f3ee; /* Light heading color */
+        }
+        .result-info {
+            margin-top: 20px;
+        }
+        .valid-license {
+            color: #4CAF50; /* Green color for valid license plate */
+        }
+        .invalid-license {
+            color: #f44336; /* Red color for invalid license plate */
+        }
+        .back-link {
+            margin-top: 20px;
+            display: inline-block;
+            text-decoration: none;
+            color: #f4f3ee; /* Light text color */
+            background-color: #4CAF50; /* Dark background color */
+            padding: 15px 30px; /* Increased padding */
+            border-radius: 10px; /* Increased border radius */
+            transition: background-color 0.3s;
+        }
+        .back-link:hover {
+            background-color: #7b716c; /* Darker hover color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Result</h1>
+        <div class="result-info">
+            <p>Uploaded Image: {{ filename }}</p>
+            <p>OCR Result: {{ ocr_result }}</p>
+            {% if is_valid_license_plate %}
+                <p class="valid-license">License Plate is Valid</p>
+            {% else %}
+                <p class="invalid-license">License Plate is Invalid</p>
+            {% endif %}
+        </div>
+        <br>
+        <a href="/" class="back-link">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Plate Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333533; /* Dark background color */
+            color: #f4f3ee; /* Light text color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        .cover-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50vh; /* Adjust height as needed */
+            object-fit: cover;
+            overflow: hidden;
+        }
+        .cover-image img {
+            width: 100%;
+            height: 50%;
+        }
+        .container {
+            max-width: 1000px;
+            padding: 40px;
+            background-color: #323031; /* Dark container background color */
+            /*border: none; */
+            border-radius: 20px; /* Increased border radius */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Light box shadow */
+            text-align: center;
+            z-index: 1; /* Ensure container is on top of the image */
+        }
+        h1 {
+            color: #f4f3ee; /* Light heading color */
+        }
+        .upload-form {
+            margin-top: 20px;
+        }
+        .upload-input {
+            display: none;
+        }
+        .upload-label {
+            cursor: pointer;
+            background-color: #4CAF50; /* Darker upload button color */
+            color: #f4f3ee; /* Light text color */
+            padding: 15px 30px; /* Increased padding */
+            border-radius: 10px; /* Increased border radius */
+            transition: background-color 0.3s;
+        }
+        .upload-label:hover {
+            background-color: #7b716c; /* Darker hover color */
+        }
+    </style>
+</head>
+<body>
+    <div class="cover-image">
+        <img src="static/BgBlur.jpeg" alt="Cover Image">
+    </div>
+    <div class="container">
+        <h1>License Plate Detection</h1>
+        <form class="upload-form" action="/process_image" method="post" enctype="multipart/form-data">
+            <label for="file" class="upload-label">Select Image</label>
+            <input type="file" id="file" name="file" class="upload-input" accept=".jpg, .jpeg, .png" required>
+            <button type="submit" class="upload-button">Process Image</button>
+        </form>
+    </div>
+</body>
+</html>

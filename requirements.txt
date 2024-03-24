@@ -1,0 +1,11 @@
+base
+#ultralytics
+torch
+Pillow==10.2.0
+python-utils
+#python-models
+google
+google.cloud
+google.cloud.vision
+google-api-core
+flask
