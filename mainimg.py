@@ -6,6 +6,12 @@ from google.cloud import vision_v1
 from google.cloud.vision_v1 import types
 import re
 import shutil
+import smtplib
+from flask_mail import Mail, Message
+from email.mime.base import MIMEBase
+from email import encoders
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 app = Flask(__name__, static_folder='static')
 ROOT_DIR = '/home/user/Public/Projects/PlatePerfect'
@@ -13,6 +19,32 @@ ROOT_DIR = '/home/user/Public/Projects/PlatePerfect'
 # Set the path to the YOLOv8 model and Google Cloud Vision API key file
 YOLO_MODEL_PATH = '/home/user/Public/Projects/PlatePerfect/best.pt'
 GOOGLE_CLOUD_VISION_KEY_PATH = r'/home/user/Public/Projects/PlatePerfect/.venv/VisionAPIServiceKey.json'
+
+# Configure Flask-Mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Enter your SMTP server
+app.config['MAIL_PORT'] = 465  # Enter your SMTP port
+app.config['MAI;_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+#app.config['MAIL_DEBUG'] = True
+app.config['MAIL_USERNAME'] = 'mainprojanpr@gmail.com'  # Enter your email address
+app.config['MAIL_PASSWORD'] = 'APP_PASSWORD'  # Enter your email password
+mail = Mail(app)
+
+
+# Function to send email alert
+def send_email_alert(filename, ocr_result):
+    msg = Message('Invalid License Plate Detected',
+                  sender='mainprojanpr@gmail.com',
+                  recipients=['patwarirenuka22@gmail.com', 'asaavi30@gmail.com', 'roja.ambati20@gmail.com', 'aryachavarkar390@gmail.com', 'arichavarkar90@gmail.com'])  # Enter the recipient email address
+    msg.body = f"An invalid License Plate is detected: {ocr_result}"
+
+    with app.open_resource(filename) as attachment:
+        msg.attach(filename, 'image/png', attachment.read())
+
+    mail.send(msg)
+    print('email sent')
+
+
 
 # Function to validate Indian number plate format
 def is_valid_number_plate(license_plate_text):
@@ -87,6 +119,10 @@ def process_image():
             # Validate the license plate format
             is_valid_license_plate = is_valid_number_plate(ocr_result)
 
+            # Send email alert if the license plate is invalid
+            if not is_valid_license_plate:
+                send_email_alert(file_path, ocr_result)
+
             return render_template('result.html', filename=filename, ocr_result=ocr_result, is_valid_license_plate=is_valid_license_plate)
 
     return redirect(request.url)
@@ -103,4 +139,4 @@ def detect_text_vision_api(img_path):
 
 if __name__ == '__main__':
     os.makedirs('uploads', exist_ok=True)
-    app.run(debug=True)
+    app.run(debug=True, port=5001)

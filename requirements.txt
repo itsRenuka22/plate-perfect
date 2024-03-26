@@ -9,3 +9,4 @@ google.cloud
 google.cloud.vision
 google-api-core
 flask
+Flask-Mail
