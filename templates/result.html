@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
+    <title>License Plate Detection Result</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #222; /* Dark background color */
+            background-color: #333533; /* Dark background color */
             color: #f4f3ee; /* Light text color */
             margin: 0;
             padding: 0;
@@ -16,55 +16,90 @@
             align-items: center;
             height: 100vh;
         }
+        .cover-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50vh; /* Adjust height as needed */
+            object-fit: cover;
+            overflow: hidden;
+        }
+        .cover-image img {
+            width: 100%;
+            height: 50%;
+        }
         .container {
-            max-width: 600px;
+            max-width: 800px;
             padding: 20px;
-            background-color: #463f3a; /* Dark container background color */
-            border-radius: 20px; /* Increased border radius */
+            background-color: #323031; /* Dark container background color */
+            border-radius: 10px; /* Increased border radius */
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Light box shadow */
             text-align: center;
         }
-        h1 {
-            color: #f4f3ee; /* Light heading color */
-        }
-        .result-info {
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
         }
-        .valid-license {
-            color: #4CAF50; /* Green color for valid license plate */
+        th, td {
+            border: 1px solid #f4f3ee; /* Light border color */
+            padding: 8px;
         }
-        .invalid-license {
-            color: #f44336; /* Red color for invalid license plate */
-        }
-        .back-link {
-            margin-top: 20px;
-            display: inline-block;
-            text-decoration: none;
+        th {
+            background-color: #4CAF50; /* Darker table header background color */
             color: #f4f3ee; /* Light text color */
-            background-color: #4CAF50; /* Dark background color */
-            padding: 15px 30px; /* Increased padding */
-            border-radius: 10px; /* Increased border radius */
+        }
+        td img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+        .valid {
+            color: green; /* Green color for valid entries */
+        }
+        .invalid {
+            color: red; /* Red color for invalid entries */
+        }
+        .back-button {
+            margin-top: 20px;
+            background-color: #4CAF50; /* Darker button color */
+            color: #f4f3ee; /* Light text color */
+            padding: 10px 20px; /* Increased padding */
+            border: none;
+            border-radius: 5px; /* Increased border radius */
+            cursor: pointer;
             transition: background-color 0.3s;
         }
-        .back-link:hover {
-            background-color: #7b716c; /* Darker hover color */
+        .back-button:hover {
+            background-color: #5783db; /* Darker hover color */
         }
     </style>
 </head>
 <body>
+    <div class="cover-image">
+        <img src="static/BgBlur.jpeg" alt="Cover Image">
+    </div>
     <div class="container">
-        <h1>Result</h1>
-        <div class="result-info">
-            <p>Uploaded Image: {{ filename }}</p>
-            <p>OCR Result: {{ ocr_result }}</p>
-            {% if is_valid_license_plate %}
-                <p class="valid-license">License Plate is Valid</p>
-            {% else %}
-                <p class="invalid-license">License Plate is Invalid</p>
-            {% endif %}
-        </div>
-        <br>
-        <a href="/" class="back-link">Back to Home</a>
+        <h2>License Plate Detection Result</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>OCR Result</th>
+                    <th>Validity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in result %}
+                <tr>
+                    <td><img src="{{ url_for('get_image', filename=item['filename']) }}"></td>
+                    <td>{{ item['ocr_result'] }}</td>
+                    <td class="{{ 'valid' if item['is_valid'] else 'invalid' }}">{{ "Valid" if item['is_valid'] else "Invalid" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button class="back-button" onclick="window.location.href='/';">Back to Upload</button>
     </div>
 </body>
 </html>

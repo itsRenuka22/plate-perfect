@@ -34,7 +34,6 @@
             max-width: 1000px;
             padding: 40px;
             background-color: #323031; /* Dark container background color */
-            /*border: none; */
             border-radius: 20px; /* Increased border radius */
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Light box shadow */
             text-align: center;
@@ -58,7 +57,7 @@
             transition: background-color 0.3s;
         }
         .upload-label:hover {
-            background-color: #7b716c; /* Darker hover color */
+            background-color: #5783db; /* Darker hover color */
         }
     </style>
 </head>
@@ -68,10 +67,10 @@
     </div>
     <div class="container">
         <h1>License Plate Detection</h1>
-        <form class="upload-form" action="/process_image" method="post" enctype="multipart/form-data">
-            <label for="file" class="upload-label">Select Image</label>
-            <input type="file" id="file" name="file" class="upload-input" accept=".jpg, .jpeg, .png" required>
-            <button type="submit" class="upload-button">Process Image</button>
+        <form class="upload-form" action="/" method="post" enctype="multipart/form-data">
+            <label for="file" class="upload-label">Select File</label>
+            <input type="file" id="file" name="file" class="upload-input" accept=".jpg, .jpeg, .png, .mp4" required>
+            <button type="submit" class="upload-button">Process File</button>
         </form>
     </div>
 </body>
