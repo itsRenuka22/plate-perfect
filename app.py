@@ -8,19 +8,21 @@ from helper import is_valid_number_plate, detect_text_vision_api
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'uploads'
-DISTINCT_OCR_FOLDER = 'distinct_ocr'
+UPLOAD_FOLDER = 'uploads'   #------ Path to your upload folder ------------
+DISTINCT_OCR_FOLDER = 'distinct_ocr' #------ Path to your distinct_ocr folder ------------
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'mp4'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Set the path to the YOLOv8 model and Google Cloud Vision API key file
-YOLO_MODEL_PATH = '/home/user/Public/Projects/PlatePerfect/best.pt'
-GOOGLE_CLOUD_VISION_KEY_PATH = r'/home/user/Public/Projects/PlatePerfect/.venv/VisionAPIServiceKey.json'
+YOLO_MODEL_PATH = '/home/user/Public/Projects/PlatePerfect/best.pt'   #----CHANGE PATH TO YOUR best.pt file path ----
+GOOGLE_CLOUD_VISION_KEY_PATH = r'/home/user/Public/Projects/PlatePerfect/.venv/VisionAPIServiceKey.json'  #----CHANGE PATH TO YOUR VisionAPIServiceKey.json stored in .venv file path ----
 
 # Configure YOLO model
 yolo_model = YOLO(YOLO_MODEL_PATH)
 
+
+# -------- CHANGE ALL FILE PATHS HERE TO THE RESPECTIVE FOLDERS IN YOUR SYSTEM -----
 predict_dir = '/home/user/Public/Projects/PlatePerfect/runs/detect/predict'
 license_plate_dir_img = '/home/user/Public/Projects/PlatePerfect/runs/detect/predict/crops/LicensePlate'
 distinct_ocr_dir = '/home/user/Public/Projects/PlatePerfect/distinct_ocr' 
@@ -119,7 +121,7 @@ def process_image(file_path):
     results = yolo_model.predict(source=file_path, conf=0.7, iou=0.7, save=True, save_conf=True, save_txt=True, save_crop=True)
 
     # Move the predict directory
-    shutil.move("/home/user/Public/Projects/BE_FinalProject/MZK-ANPR/Automatic-License-Plate-Recognition-using-YOLOv8/runs/detect/predict", "/home/user/Public/Projects/PlatePerfect/runs/detect/predict")
+    #shutil.move("/home/user/Public/Projects/BE_FinalProject/MZK-ANPR/Automatic-License-Plate-Recognition-using-YOLOv8/runs/detect/predict", "/home/user/Public/Projects/PlatePerfect/runs/detect/predict")
     
     # Perform OCR on images in the directory and save results in a dictionary
     ocr_results_dict = {}
@@ -185,7 +187,7 @@ def process_video(video_path):
     results = yolo_model.track(source=video_path, conf=0.7, iou=0.7, save=True, save_conf=True, save_txt=True, save_crop=True)
 
     # Move the track directory
-    shutil.move("/home/user/Public/Projects/BE_FinalProject/MZK-ANPR/Automatic-License-Plate-Recognition-using-YOLOv8/runs/detect/track", "/home/user/Public/Projects/PlatePerfect/runs/track")
+    #shutil.move("/home/user/Public/Projects/BE_FinalProject/MZK-ANPR/Automatic-License-Plate-Recognition-using-YOLOv8/runs/detect/track", "/home/user/Public/Projects/PlatePerfect/runs/track")
 
     # Dictionary to store the highest confidence for each license plate ID
     highest_confidence_per_plate = {}

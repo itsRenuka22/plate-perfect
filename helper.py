@@ -4,7 +4,7 @@ from google.cloud import vision_v1
 from google.cloud.vision_v1 import types
 
 # Set the path to the Google Cloud Vision API key file
-GOOGLE_CLOUD_VISION_KEY_PATH = r'/home/user/Public/Projects/PlatePerfect/.venv/VisionAPIServiceKey.json'
+GOOGLE_CLOUD_VISION_KEY_PATH = r'/home/user/Public/Projects/PlatePerfect/.venv/VisionAPIServiceKey.json' #----CHANGE PATH TO YOUR VisionAPIServiceKey.json stored in .venv file path ----
 
 # Configure Google Cloud Vision API client
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = GOOGLE_CLOUD_VISION_KEY_PATH
@@ -22,11 +22,11 @@ def is_valid_number_plate(license_plate_text):
 
     # Remove spaces and "\n" characters from the license plate text
     license_plate_text = re.sub(r'[\s\n]', '', license_plate_text)
-    print("spaces and \n REMOVED LP:", license_plate_text)
+    print("spaces and '\n' REMOVED LP:", license_plate_text)
 
     # Remove spaces, special characters from the license plate text
     license_plate_text = re.sub(r'[*.]', '', license_plate_text)
-    print("* REMOVED LP:", license_plate_text)
+    print("'*', '.' REMOVED LP:", license_plate_text)
 
     # Check if the license plate text contains only English alphabets
     if not re.match(r'^[a-zA-Z0-9\s]+$', license_plate_text):
