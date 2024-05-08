@@ -1,5 +1,6 @@
 import os
 import re
+import difflib
 from google.cloud import vision_v1
 from google.cloud.vision_v1 import types
 
@@ -46,3 +47,21 @@ def detect_text_vision_api(img_path):
     texts = response.text_annotations
 
     return texts[0].description if texts else 'Text not detected'
+
+def is_similar_ocr_result(result1, result2):
+    """
+    Function to check if two OCR results are similar based on certain conditions.
+    """
+    # Ignore non-alphabetic characters and spaces for comparison
+    clean_result1 = ''.join(filter(str.isalpha, result1)).lower()
+    clean_result2 = ''.join(filter(str.isalpha, result2)).lower()
+
+    # Calculate the difference between the two cleaned OCR results
+    difference = difflib.ndiff(clean_result1, clean_result2)
+
+    # Count the number of added, removed, and changed characters
+    added = sum(1 for d in difference if d.startswith('+'))
+    removed = sum(1 for d in difference if d.startswith('-'))
+
+    # Consider OCR results similar if the difference is within 2 characters
+    return added <= 2 or removed <= 2

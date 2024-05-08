@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Plate Perfect</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333533;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure full viewport height */
+            position: relative;
+        }
+
+        /* Cover Image Styles */
+        .cover-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50vh; /* Adjust height as needed */
+            object-fit: cover;
+            overflow: hidden;
+        }
+        .cover-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .cover-image h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            color: #fff; /* Light heading color */
+            text-align: center;
+            padding: 10px 20px; /* Add padding */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+            font-family: 'Merriweather Sans', sans-serif; /* Use a fallback font */
+            font-weight: 700; /* Bold */
+        }
+        .cover-image:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+        }
+
+
+        /* Container Styles */
+        .container {
+            max-width: 800px;
+            padding: 40px;
+            text-align: justify;
+            background-color: #323031;
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Light shadow */
+            margin: 50vh auto 0; /* Position container below cover image */
+        }
+
+        /* Heading Styles */
+        h1 {
+            color: #f4f3ee;
+            text-align: center;
+            margin-bottom: 30px; /* Added margin below heading */
+            font-size: 36px; /* Increased font size */
+            font-weight: bold; /* Bold font weight */
+        }
+        h2 {
+            color: #EFA00B; /* Light heading color */
+            text-align: center;
+            font-size: 30px; /* Reduced font size */
+            margin-bottom: 40px; /* Added margin to separate it from the button */
+            margin-top: 10px;
+        }
+        h3 {
+            color: #EFA00B; /* Dark color for headings */
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Paragraph Styles */
+        p {
+            color: #E2E2E2;
+            margin-bottom: 20px;
+            margin-top: 20px; /* Added margin to push paragraphs down */
+            line-height: 1.6; /* Improved readability with increased line height */
+            font-size: 18px; /* Increased font size */
+        }
+
+        /* Navigation bar styles */
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@1,600&display=swap');
+        .navbar {
+            background-color: #4D5458; /* Dark background color */
+            padding: 10px 0; /* Adjust padding as needed */
+            text-align: center;
+            position: fixed; /* Fixed position */
+            width: 100%; /* Full width */
+            top: 0; /* Align to the top */
+            z-index: 1000; /* Ensure it's on top of other content */
+            display: flex; /* Use flexbox for layout */
+            justify-content: center; /* Align links to the left */
+            align-items: center; /* Center vertically */
+            font-family: "Lora", serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: italic;
+        }
+        .navbar a {
+            color: #f4f3ee; /* Light text color */
+            text-decoration: none; /* Remove underline */
+            margin-right: 40px; /* Adjust spacing between links */
+            font-size: 18px; /* Adjust font size */
+        }
+        .navbar a:hover {
+            color: #5783db; /* Darker color on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="static/about.html">About Us</a>
+        <a href="guidelines.html">Guidelines</a>
+    </div>
+
+    <!-- Cover Image -->
+    <div class="cover-image">
+        <img src="BgBlur.jpeg" alt="Cover Image">
+        <h1>About Us</h1>
+    </div>
+    
+    <div class="container">
+        <h2>Welcome to Plate Perfect</h2>
+        <p>At Plate Perfect, we redefine the standards for License Plate Recognition (ANPR) systems. We've mastered the art of scrutinizing every alphanumeric combination that rolls by, ensuring that even the most unconventional plates are swiftly identified and flagged.</p>
+
+        <p>In a world where conformity reigns supreme, we pride ourselves on being the anomaly detectors, the grammar guardians of the license plate realm. Our cutting-edge technology doesn't just see letters and numbers; it dissects, analyzes, and interprets with unparalleled precision. Whether it's a jumble of characters, a creative interpretation of a state's design, or a quirky customization, we're on the lookout.</p>
+
+        <p>Why settle for mediocrity when you can have perfection? Plate Perfect isn't just about recognizing plates; it's about upholding standards. Our ANPR system is the embodiment of meticulousness, ensuring that every plate, regardless of its deviation from the norm, undergoes the scrutiny it deserves.</p>
+
+        <p>Join us in our mission to revolutionize the world of license plate recognition. With Plate Perfect, rest assured that every plate gets its grammar checked, every deviation is flagged, and perfection becomes the new standard.</p>
+    
+        <h3>Creators</h3>
+        <p style="font-style: italic;"><span style="margin: 0 32px;">Renuka Patwari</span> 
+                                        <span style="margin: 0 32px;">Arya Chavarkar</span> 
+                                        <span style="margin: 0 32px;">Roja Ambati</span> 
+                                        <span style="margin: 0 32px;">Asaavi Tupsounder</span> </p>
+
+    </div>
+</body>
+</html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>License Plate Detection Result</title>
     <style>
+        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #333533; /* Dark background color */
@@ -16,6 +17,8 @@
             align-items: center;
             height: 100vh;
         }
+
+        /* Cover Image Styles */
         .cover-image {
             position: absolute;
             top: 0;
@@ -27,16 +30,50 @@
         }
         .cover-image img {
             width: 100%;
-            height: 50%;
+            height: 100%;
+            object-fit: cover;
         }
+        .cover-image h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            color: #fff; /* Light heading color */
+            text-align: center;
+            padding: 10px 20px; /* Add padding */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+            font-family: 'Merriweather Sans', sans-serif; /* Use a fallback font */
+            font-weight: 700; /* Bold */
+        }
+        .cover-image:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+        }
+        /* Container Styles */
         .container {
-            max-width: 800px;
-            padding: 20px;
+            margin-top: 200px; /* Adjusted margin to push it down */
+            max-width: 1000px;
+            padding: 40px;
             background-color: #323031; /* Dark container background color */
-            border-radius: 10px; /* Increased border radius */
+            border-radius: 20px; /* Increased border radius */
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Light box shadow */
             text-align: center;
+            z-index: 1; /* Ensure container is on top of the image */
         }
+
+        /* Heading Styles */
+        h2 {
+            color: #f4f3ee; /* Light heading color */
+            margin-top: 10px;
+        }
+
+        /* Table Styles */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -55,11 +92,15 @@
             max-height: 200px;
         }
         .valid {
-            color: green; /* Green color for valid entries */
+            color: rgb(34, 168, 34); /* Green color for valid entries */
+            font-weight: 700; /* Bold */
         }
         .invalid {
             color: red; /* Red color for invalid entries */
+            font-weight: 700; /* Bold */
         }
+
+        /* Button Styles */
         .back-button {
             margin-top: 20px;
             background-color: #4CAF50; /* Darker button color */
@@ -69,18 +110,24 @@
             border-radius: 5px; /* Increased border radius */
             cursor: pointer;
             transition: background-color 0.3s;
+            text-decoration: none; /* Remove underline */
+            font-size: 18px; /* Adjust font size */
         }
         .back-button:hover {
-            background-color: #5783db; /* Darker hover color */
+            background-color: #277a2a; /* Darker hover color */
         }
     </style>
 </head>
 <body>
+    <!-- Cover Image -->
     <div class="cover-image">
         <img src="static/BgBlur.jpeg" alt="Cover Image">
+        <h1>License Plate Detection Result</h1>
     </div>
+    
+    <!-- Container for main content -->
     <div class="container">
-        <h2>License Plate Detection Result</h2>
+        <h2>Status of Detection</h2>
         <table>
             <thead>
                 <tr>

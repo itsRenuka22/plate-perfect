@@ -1,16 +1,17 @@
 import os
 import shutil
 from ultralytics import YOLO
+from datetime import datetime
 from flask import Flask, request, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
-from helper import is_valid_number_plate, detect_text_vision_api
+from helper import is_valid_number_plate, detect_text_vision_api, is_similar_ocr_result
 
 app = Flask(__name__)
 
 UPLOAD_FOLDER = 'uploads'   #------ Path to your upload folder ------------
 DISTINCT_OCR_FOLDER = 'distinct_ocr' #------ Path to your distinct_ocr folder ------------
-ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'mp4'}
+ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'mp4', 'webm'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -47,10 +48,14 @@ mail = Mail(app)
 
 # Function to send email alert
 def send_email_alert(filename, ocr_result):
-    msg = Message('Invalid License Plate Detected',
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    msg = Message(f"Alert🚨🚨: Invalid license plate detected at {timestamp}",
                   sender='mainprojanpr@gmail.com',
                   recipients=['patwarirenuka22@gmail.com', 'asaavi30@gmail.com', 'roja.ambati20@gmail.com', 'aryachavarkar390@gmail.com', 'arichavarkar90@gmail.com'])  # Enter the recipient email address
-    msg.body = f"An invalid License Plate is detected: {ocr_result}"
+    msg.body = (f"This is to notify that an invalid license plate was detected at {timestamp} bearing the following inscription: "
+        f"{ocr_result}. Attached is the image of the non-standard license plate.\n\n"
+        "Regards,\nPlate Perfect Team")
 
     with app.open_resource(filename) as attachment:
         msg.attach(filename, 'image/png', attachment.read())
@@ -92,7 +97,7 @@ def upload_file():
                     is_valid = is_valid_number_plate(ocr_result)
                     result.append({'filename': filename, 'ocr_result': ocr_result, 'is_valid': is_valid})
                 #result = [{'filename': filename, 'ocr_result': ocr_result, 'is_valid': is_valid}]
-            elif filename.endswith('mp4'):
+            elif filename.endswith(('mp4', 'webm')):
                 ocr_results = process_video(file_path)
                 result = []
                 for filename, ocr_result in ocr_results.items():
@@ -121,7 +126,7 @@ def process_image(file_path):
     results = yolo_model.predict(source=file_path, conf=0.7, iou=0.7, save=True, save_conf=True, save_txt=True, save_crop=True)
 
     # Move the predict directory
-    #shutil.move("/home/user/Public/Projects/BE_FinalProject/MZK-ANPR/Automatic-License-Plate-Recognition-using-YOLOv8/runs/detect/predict", "/home/user/Public/Projects/PlatePerfect/runs/detect/predict")
+    shutil.move("/home/user/Public/Projects/BE_FinalProject/MZK-ANPR/Automatic-License-Plate-Recognition-using-YOLOv8/runs/detect/predict", "/home/user/Public/Projects/PlatePerfect/runs/detect/predict")
     
     # Perform OCR on images in the directory and save results in a dictionary
     ocr_results_dict = {}
@@ -187,7 +192,7 @@ def process_video(video_path):
     results = yolo_model.track(source=video_path, conf=0.7, iou=0.7, save=True, save_conf=True, save_txt=True, save_crop=True)
 
     # Move the track directory
-    #shutil.move("/home/user/Public/Projects/BE_FinalProject/MZK-ANPR/Automatic-License-Plate-Recognition-using-YOLOv8/runs/detect/track", "/home/user/Public/Projects/PlatePerfect/runs/track")
+    shutil.move("/home/user/Public/Projects/BE_FinalProject/MZK-ANPR/Automatic-License-Plate-Recognition-using-YOLOv8/runs/detect/track", "/home/user/Public/Projects/PlatePerfect/runs/track")
 
     # Dictionary to store the highest confidence for each license plate ID
     highest_confidence_per_plate = {}
@@ -245,7 +250,12 @@ def process_video(video_path):
     # Filter out duplicate OCR results and store distinct ones in a new dictionary
     distinct_ocr_results = {}
     for filename, ocr_result in ocr_results_dict.items():
-        if ocr_result not in distinct_ocr_results.values():
+        is_similar = False
+        for existing_filename, existing_ocr_result in distinct_ocr_results.items():
+            if is_similar_ocr_result(ocr_result, existing_ocr_result):
+                is_similar = True
+                break
+        if not is_similar:
             distinct_ocr_results[filename] = ocr_result
 
     # Create distinct_ocr folder if it doesn't exist
