@@ -5,7 +5,7 @@ from google.cloud import vision_v1
 from google.cloud.vision_v1 import types
 
 # Set the path to the Google Cloud Vision API key file
-GOOGLE_CLOUD_VISION_KEY_PATH = r'/home/user/Public/Projects/PlatePerfect/.venv/VisionAPIServiceKey.json' #----CHANGE PATH TO YOUR VisionAPIServiceKey.json stored in .venv file path ----
+GOOGLE_CLOUD_VISION_KEY_PATH = r'C://Users//asaavi//Desktop//plateperfect2//plate-perfect//.venv//VisionAPIServiceKey.json' #----CHANGE PATH TO YOUR VisionAPIServiceKey.json stored in .venv file path ----
 
 # Configure Google Cloud Vision API client
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = GOOGLE_CLOUD_VISION_KEY_PATH

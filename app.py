@@ -16,7 +16,7 @@ ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'mp4', 'webm'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Set the path to the YOLOv8 model and Google Cloud Vision API key file
-YOLO_MODEL_PATH = '/home/user/Public/Projects/PlatePerfect/best.pt'   #----CHANGE PATH TO YOUR best.pt file path ----
+YOLO_MODEL_PATH = 'C://Users//asaavi//Desktop//plateperfect2//plate-perfect//best.pt'   #----CHANGE PATH TO YOUR best.pt file path ----
 GOOGLE_CLOUD_VISION_KEY_PATH = r'/home/user/Public/Projects/PlatePerfect/.venv/VisionAPIServiceKey.json'  #----CHANGE PATH TO YOUR VisionAPIServiceKey.json stored in .venv file path ----
 
 # Configure YOLO model
@@ -24,16 +24,16 @@ yolo_model = YOLO(YOLO_MODEL_PATH)
 
 
 # -------- CHANGE ALL FILE PATHS HERE TO THE RESPECTIVE FOLDERS IN YOUR SYSTEM -----
-predict_dir = '/home/user/Public/Projects/PlatePerfect/runs/detect/predict'
-license_plate_dir_img = '/home/user/Public/Projects/PlatePerfect/runs/detect/predict/crops/LicensePlate'
-distinct_ocr_dir = '/home/user/Public/Projects/PlatePerfect/distinct_ocr' 
-track_dir = '/home/user/Public/Projects/PlatePerfect/runs/track'
-txt_dir = '/home/user/Public/Projects/PlatePerfect/runs/track/labels'   #label folder used for the fetching id of the vehicle and confidence level 
-license_plate_dir_vid = '/home/user/Public/Projects/PlatePerfect/runs/track/crops/LicensePlate'  # cropped images of LP are stored here
-check2_dir = '/home/user/Public/Projects/PlatePerfect/check2'   # filtered images of the LPs with different ids and confidence above 0.7
+predict_dir = 'C://Users//asaavi//Desktop//plateperfect2//plate-perfect//runs//detect//predict'
+license_plate_dir_img = 'C://Users//asaavi//Desktop//plateperfect2//plate-perfect//runs//detect//predict//crops//LicensePlate'
+distinct_ocr_dir = 'C://Users//asaavi//Desktop//plateperfect2//plate-perfect//distinct_ocr' 
+track_dir = 'C://Users//asaavi//Desktop//plateperfect2//plate-perfect//runs//track'
+txt_dir = 'C://Users//asaavi//Desktop//plateperfect2//plate-perfect//runs//track//labels'   #label folder used for the fetching id of the vehicle and confidence level 
+license_plate_dir_vid = 'C://Users//asaavi//Desktop//plateperfect2//plate-perfect//runs//track//crops//LicensePlate'  # cropped images of LP are stored here
+check2_dir = 'C://Users//asaavi//Desktop//plateperfect2//plate-perfect//check2'   # filtered images of the LPs with different ids and confidence above 0.7
 
 # check2 dir might contain images of same LP, to resolve, this directory contains images which have distinct OCR output effectively discarding the duplicate LP images from check2
-distinct_ocr_dir = '/home/user/Public/Projects/PlatePerfect/distinct_ocr' 
+distinct_ocr_dir = 'C://Users//asaavi//Desktop//plateperfect2//plate-perfect//distinct_ocr' 
 
 
 # Configure Flask-Mail
@@ -126,7 +126,7 @@ def process_image(file_path):
     results = yolo_model.predict(source=file_path, conf=0.7, iou=0.7, save=True, save_conf=True, save_txt=True, save_crop=True)
 
     # Move the predict directory
-    shutil.move("/home/user/Public/Projects/BE_FinalProject/MZK-ANPR/Automatic-License-Plate-Recognition-using-YOLOv8/runs/detect/predict", "/home/user/Public/Projects/PlatePerfect/runs/detect/predict")
+    shutil.move("C://Users//asaavi//plate-perfect//runs//detect//predict", "C://Users//asaavi//Desktop//plateperfect2//plate-perfect//runs//detect//predict")
     
     # Perform OCR on images in the directory and save results in a dictionary
     ocr_results_dict = {}
@@ -192,7 +192,7 @@ def process_video(video_path):
     results = yolo_model.track(source=video_path, conf=0.7, iou=0.7, save=True, save_conf=True, save_txt=True, save_crop=True)
 
     # Move the track directory
-    shutil.move("/home/user/Public/Projects/BE_FinalProject/MZK-ANPR/Automatic-License-Plate-Recognition-using-YOLOv8/runs/detect/track", "/home/user/Public/Projects/PlatePerfect/runs/track")
+    shutil.move("C://Users//asaavi//plate-perfect//runs//detect//track", "C://Users//asaavi//Desktop//plateperfect2//plate-perfect//runs//track")
 
     # Dictionary to store the highest confidence for each license plate ID
     highest_confidence_per_plate = {}
