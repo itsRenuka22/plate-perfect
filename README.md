@@ -1,4 +1,4 @@
-# PLATE PERFECT - Automatic Recognition of Non-Standard Number Plates using Yolov8
+# PLATE PERFECT - Automatic Recognition of Non-Standard Number Plates using Yolov8 - image + video support
 
 ## Description
 
@@ -9,8 +9,10 @@ Detection of Number Plate using the robust and state-of-art Yolov8 model, latest
 1. **Clone the repository locally:**
 
     ```bash
-    git clone https://github.com/itsRenuka22/plate-perfect.git
+    git clone https://github.com/itsRenuka22/plate-perfect.git -b img+vid
     ```
+  
+    Git CheatSheet for git help: https://docs.google.com/document/d/1k16_CxP0rzVt2fje0z0geZ5SYgDaD2lnRaD5fZ2VpFs/edit?usp=sharing
 
 2. **Create Python3.10 virtual environment(venv) and activate it**
   
@@ -33,20 +35,28 @@ Detection of Number Plate using the robust and state-of-art Yolov8 model, latest
       pip install -r requirements.txt
     ```
 
+5. **Create following empty folders**
+
+      ```bash
+      check2
+      distinct_ocr
+      uploads
+      ```
+
 4. **Change paths**
 
       ```bash
-      Update the paths inside the code  as per your system
+      Update the paths inside the code as per your system. Locations where paths are to be changed are marked.
     ```
 
 5. **Execute**
 
       ```bash
-      python3 mainimg.py
+      python3 app.py
     ```
 
 **Input:**
-- An image file.
+- An image or video file.
 
 ### Example
 
