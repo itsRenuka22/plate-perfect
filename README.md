@@ -9,7 +9,7 @@ Detection of Number Plate using the robust and state-of-art Yolov8 model, latest
 1. **Clone the repository locally:**
 
     ```bash
-    git clone https://github.com/itsRenuka22/plate-perfect.git -b img+vid
+    git clone https://github.com/itsRenuka22/plate-perfect.git
     ```
   
     Git CheatSheet for git help: https://docs.google.com/document/d/1k16_CxP0rzVt2fje0z0geZ5SYgDaD2lnRaD5fZ2VpFs/edit?usp=sharing
